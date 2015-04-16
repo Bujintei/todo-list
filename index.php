@@ -5,8 +5,8 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-	<div class="wrap">
-		<div class="task-list">
+	<div class="wrap"> <!-- all our tasks will be in a list and our div class wrap will wrap it -->
+		<div class="task-list"> 
 			<ul>
 				<?php require("includes/connect.php"); ?>
 			</ul>
