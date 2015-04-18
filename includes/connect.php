@@ -2,8 +2,8 @@
 //connects our website to mysqli server
 $mysqli = new mysqli('localhost', 'root', 'root', 'todo');
 //$mysqli->connect_error then we want it to die and have this message
-if ($mysqli->connect_error) { 
-	die('Connect Error (' . $mysqli->connect_error .')'
+if($mysqli->connect_error) {
+	die('connection error (' . $mysqli->connect_errno .  ')'
 		. $mysqli->connect_error);
 }
 else {

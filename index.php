@@ -2,13 +2,13 @@
 <html>
 <head>
 	<title> Bruhndonie's To-Do List </title>
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
 </head>
 <body>
 	<div class="wrap"> <!-- all our tasks will be in a list and our div class wrap will wrap it -->
-		<div class="task-list"> 
+		<div class="task-list">
 			<ul>
-				<?php require("includes/connect.php"); 
+				<?php require("Includes/connect.php"); 
 				$mysqli = new mysqli('localhost', 'root', 'root', 'todo');
 				$query = "SELECT * FROM tasks ORDER BY date ASC, time ASC";
 				if ($result = $mysqli->query($query)) {
@@ -17,7 +17,7 @@
 						while($row = $result->fetch_assoc()){
 							$task_id = $row['id'];
 							$task_name = $row['task'];
-							
+
 							echo '<li> 
 							<span>'. $task_name . '</span>
 							<img id="'. $task_id . '" class="delete-button" width="10px" src="images/close.svg"/>
@@ -28,9 +28,9 @@
 				?>
 			</ul>
 		</div>
-	<form class="add-new-task" autocomplete="off">
-		<input type="text" name="new-task" placeholder="Add new item..."/>
-	</form>
+		<form class="add-new-task" autocomplete="off">
+			<input type="text" name="new-task" placeholder="Add new item..."/>
+		</form>
 	</div>
 </body>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -39,12 +39,12 @@
 
 	function add_task(){
 		$('.add-new-task').submit(function() {
-			var new_task = $('.add-new-task input [name=new-task]').val();
-
-			if (new_task !='') {
-				$.post('includes/add-task.php', {task: new_task}, function(data) {
+			var new_task = $('.add-new-task input[name=new-task]').val();
+	
+			if(new_task != '') {
+				$.post('Includes/add-task.php', {task: new_task}, function(data) {
 					$('add-new-task input[name=new-task]').val();
-						$(data).appendTo('task-list ul').hide().fadeIn();
+						$(data).appendTo('.task-list ul').hide().fadeIn();
 				});
 			}
 			return false;
@@ -53,13 +53,13 @@
 	$('.delete-button').click(function(){
 		var current_element = $(this);
 		var task_id = $(this).attr('id');
-
-		$.post('inludes/delete-task.php', {id: task_id}, function(){
+		
+		$.post('includes/delete-task.php', {id: task_id}, function(){
 			current_element.parent().fadeOut("fast", function(){
 			$(this).remove();
 			});
 		});
-	});	
+	});		
 </script>
 
 </html>
