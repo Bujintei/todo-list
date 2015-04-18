@@ -17,9 +17,11 @@
 						while($row = $result->fetch_assoc()){
 							$task_id = $row['id'];
 							$task_name = $row['task'];
-							echo "<li> 
-							<span>'.$task_name'
-							"
+							
+							echo '<li> 
+							<span>'. $task_name . '</span>
+							<img id="'. $task_id . '" class="delete-button" width="10px" src="images/close.svg"/>
+							</li>';
 						}
 					}
 				}
@@ -51,7 +53,7 @@
 	$('.delete-button').click(function(){
 		var current_element = $(this);
 		var task_id = $(this).attr('id');
-		
+
 		$.post('inludes/delete-task.php', {id: task_id}, function(){
 			current_element.parent().fadeOut("fast", function(){
 			$(this).remove();
